@@ -1,6 +1,7 @@
-#由Quiet修复
-#本脚本仅供测试使用,请下载24小时内删除
-import requests,time,re,json
+import requests
+import time
+import re
+import json
 from random import randint
 
 headers = {
@@ -142,11 +143,11 @@ def qmsg_send(msg):
         }
     requests.post(qmsg_url, data=data)
 
-# -- 配置 --
+# -- 小米运动配置 --
 # ------------------------------
-user = "XXXXX" #小米运动账号，自行替换XXXXX
-password = "XXXXX" #密码，自行替换XXXXX
-step = str(randint(34567,39999))  # 范围内取随机数， 前面不但能大于后面的数
+user = "15918716015" #账号
+password = "PJSfy757" #密码
+step = str(randint(43210,45678))  # 范围内取随机数， 前面不但能大于后面的数
 
 #以下为信息推送，不懂的可不填写不影响刷步
 sckey = ''  # server酱微信推送key(不懂不要填，可空)
