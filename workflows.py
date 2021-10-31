@@ -99,8 +99,7 @@ def main():
  
     response = requests.post(url, data=data, headers=head).json()
     print(response)
-    bj = get_utc_time()
-    result = "时间："+bj+"\n" + f"账号：{user}\n密码：{password}\n步数：{step}\n状态："+ response['message']
+    result = "时间："+date+"\n" + f"账号：{user}\n密码：{password}\n步数：{step}\n状态："+ response['message']
     sendDingDing(result)
     print(result)
     return result
