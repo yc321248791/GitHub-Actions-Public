@@ -1,8 +1,8 @@
 import requests
 import random
 
-mi_user = "手****机****号"
-mi_pwd = "密***********码"
+mi_user = "手**机**号"
+mi_pwd = "密*******码"
 mi_step = str(random.randint(75792,78520))
 
 
