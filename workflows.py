@@ -9,6 +9,13 @@ headers = {
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'
     }
 
+#UTC转北京时间
+def get_utc_time()
+    from datetime import datetime, timedelta
+    now_time = datetime.now()
+    bj_time = now_time + timedelta(hours=8)
+    bj_time = bj_time.strftime("%Y/%m/%d %H:%M:%S")
+
 #获取登录code
 def get_code(location):
     code_pattern = re.compile("(?<=access=).*?(?=&)")
@@ -98,7 +105,8 @@ def main():
  
     response = requests.post(url, data=data, headers=head).json()
     print(response)
-    result = "时间："+date+"\n" + f"账号：{user}\n密码：{password}\n步数：{step}\n状态："+ response['message']
+    bj = get_utc_time()
+    result = "时间："+bj+"\n" + f"账号：{user}\n密码：{password}\n步数：{step}\n状态："+ response['message']
     sendDingDing(result)
     print(result)
     return result
