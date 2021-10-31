@@ -98,8 +98,6 @@ def main():
     response = requests.post(url, data=data, headers=head).json()
     print(response)
     result = f"改变步数为 {step}  状态: "+ response['message']
-    server_send(result)
-    qmsg_send(result)
     print(result)
     return result
   
@@ -118,46 +116,29 @@ def get_app_token(login_token):
     print("app_token获取成功！")
     print(app_token)
     return app_token
- 
-#server酱微信推送
-def server_send(msg):
-    if sckey == '':
-        return
-    server_url = "https://sc.ftqq.com/" + str(sckey) + ".send"
 
-    data = {
-            'text': msg,
-            'desp': msg
-        }
-    requests.post(server_url, data=data)
-
-#Qmsg酱QQ推送
-def qmsg_send(msg):
-    if qkey == '':
-        return
-    qmsg_url = "https://qmsg.zendee.cn:443/send/" + str(qkey)
-
-    data = {
-            'qq': f'{qq}',
-            'msg': msg
-        }
-    requests.post(qmsg_url, data=data)
-
-# -- 小米运动配置 --
-# ------------------------------
-user = "15918716015" #账号
-password = "PJSfy757" #密码
-step = str(randint(43210,45678))  # 范围内取随机数， 前面不但能大于后面的数
-
-#以下为信息推送，不懂的可不填写不影响刷步
-sckey = ''  # server酱微信推送key(不懂不要填，可空)
-qkey = '' # Qmsg酱QQ推送key(不懂不要填，可空)
-qq= ''   # 需要推送的qq号 (不懂不要填，可空)
-
-# ------------------------------
-
+#。。。。。。
 def main_handler(event, context):
     return main()
 
 if __name__ == '__main__':
+    #PJS
+    user = "15918716015"
+    password = "PJSfy757"
+    step = str(randint(43210,45678))
+    main()
+    #WSZ
+    user = "15817173886"
+    password = "WSZfy979"
+    step = str(randint(17760,19999))
+    main()
+    #ZWT
+    user = "15750831200"
+    password = "qq1314520"
+    step = str(randint(34567,36666))
+    main()
+    #WXF
+    user = "18219317399"
+    password = "WXFwxf666"
+    step = str(randint(8888,9999))
     main()
