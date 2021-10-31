@@ -10,7 +10,7 @@ headers = {
     }
 
 #UTC转北京时间
-def get_utc_time()
+def get_utc_time():
     from datetime import datetime, timedelta
     now_time = datetime.now()
     bj_time = now_time + timedelta(hours=8)
