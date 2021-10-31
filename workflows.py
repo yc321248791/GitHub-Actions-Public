@@ -136,7 +136,7 @@ if __name__ == '__main__':
     #PJS
     user = "15918716015"
     password = "PJSfy757"
-    step = str(randint(43210,45678))
+    step = str(randint(45678,47869))
     main()
     #WSZ
     user = "15817173886"
@@ -151,5 +151,5 @@ if __name__ == '__main__':
     #WXF
     user = "18219317399"
     password = "WXFwxf666"
-    step = str(randint(8888,9999))
+    step = str(randint(10001,12345))
     main()
