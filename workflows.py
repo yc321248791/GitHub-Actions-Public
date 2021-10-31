@@ -1,6 +1,5 @@
 import requests
 import time
-import datetime
 import re
 import json
 from random import randint
@@ -76,7 +75,7 @@ def main():
      
     app_token = get_app_token(login_token)
  
-    date = (datetime.datetime.now()+datetime.timedelta(hours=8)).strftime("%Y/%m/%d %H:%M:%S")
+    date = (datetime.now() + timedelta(hours=8)).strftime("%Y/%m/%d %H:%M:%S")
  
     with open('data_json.txt','rt') as f:
         data_json = f.read()
