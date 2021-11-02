@@ -31,7 +31,7 @@ def login(user,password):
         "token":"access"
         }
     r1 = requests.post(url1,data=data1,headers=headers,allow_redirects=False)
-    print(r1.text)
+    #print(r1.text)
     location = r1.headers["Location"]
     #print(location)
     try:
@@ -39,7 +39,7 @@ def login(user,password):
     except:
         return 0,0
     print("access_code获取成功！")
-    print(code)
+    #print(code)
      
     url2 = "https://account.huami.com/v2/client/login"
     data2 = {
@@ -55,10 +55,10 @@ def login(user,password):
     r2 = requests.post(url2,data=data2,headers=headers).json()
     login_token = r2["token_info"]["login_token"]
     print("login_token获取成功！")
-    print(login_token)
+    #print(login_token)
     userid = r2["token_info"]["user_id"]
     print("userid获取成功！")
-    print(userid)
+    #print(userid)
  
     return login_token,userid
 
@@ -75,7 +75,7 @@ def main():
      
     app_token = get_app_token(login_token)
  
-    date = (datetime.now() + timedelta(hours=8)).strftime("%Y/%m/%d %H:%M:%S")
+    date = time.strftime("%Y-%m-%d",time.localtime())
  
     with open('data_json.txt','rt') as f:
         data_json = f.read()
@@ -98,8 +98,9 @@ def main():
         }
  
     response = requests.post(url, data=data, headers=head).json()
-    print(response)
-    result = "时间："+date+"\n" + f"账号：{user}\n密码：{password}\n步数：{step}\n状态："+ response['message']
+    #print(response)
+    date_time = (datetime.now() + timedelta(hours=8)).strftime("日期：%Y/%m/%d\n时间：%H:%M:%S\n")
+    result = date_time + f"账号：{user}\n密码：{password}\n步数：{step}\n状态："+ response['message']
     sendDingDing(result)
     print(result)
     return result
@@ -128,30 +129,31 @@ def sendDingDing(msg):
     xiaoding = DingtalkChatbot(webhook, secret=secret)  # 方式二：勾选“加签”选项时使用（v1.5以上新功能）
     xiaoding.send_text(str(msg), is_at_all=False)
 
-#。。。。。。
+
 def main_handler(event, context):
     return main()
 
-#PJS
-user = "15918716015"
-password = "PJSfy757"
-step = str(randint(45678,47869))
-main()
+if __name__ == '__main__':
+    #PJS
+    user = "15918716015"
+    password = "PJSfy757"
+    step = str(randint(45678,47869))
+    main()
 
-#WSZ
-user = "15817173886"
-password = "WSZfy979"
-step = str(randint(17760,19999))
-main()
+    #WSZ
+    user = "15817173886"
+    password = "WSZfy979"
+    step = str(randint(17760,19999))
+    main()
 
-#ZWT
-user = "15750831200"
-password = "qq1314520"
-step = str(randint(34567,36666))
-main()
+    #ZWT
+    user = "15750831200"
+    password = "qq1314520"
+    step = str(randint(34567,36666))
+    main()
 
-#WXF
-user = "18219317399"
-password = "WXFwxf666"
-step = str(randint(10001,12345))
-main()
+    #WXF
+    user = "18219317399"
+    password = "WXFwxf666"
+    step = str(randint(10001,12345))
+    main()
