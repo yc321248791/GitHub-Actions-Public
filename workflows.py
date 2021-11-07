@@ -100,6 +100,8 @@ def main():
     response = requests.post(url, data=data, headers=head).json()
     #print(response)
     date_time = (datetime.now() + timedelta(hours=8)).strftime("日期：%Y/%m/%d\n时间：%H:%M:%S\n")
+    #date：本地时间
+    #date_time：本地时间+8h
     result = date_time + f"账号：{user}\n密码：{password}\n步数：{step}\n状态："+ response['message']
     sendDingDing(result)
     print(result)
@@ -124,8 +126,10 @@ def get_app_token(login_token):
 # 钉钉机器人通知
 def sendDingDing(msg):
     print('正在发送钉钉机器人通知...')
-    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=fadb9756052d6bbafb45e72e10477f9ad94020ad55058903806b21209170cae0'
-    secret = 'SEC024ea5ad293132c70a3439a9dbfefcb9ed5795e8c138d4c7e39406f296c286d9'
+    #配置token值
+    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=fadb****马赛克****cae0'
+    #配置secret值
+    secret = 'SEC0****马赛克****86d9'
     xiaoding = DingtalkChatbot(webhook, secret=secret)  # 方式二：勾选“加签”选项时使用（v1.5以上新功能）
     xiaoding.send_text(str(msg), is_at_all=False)
 
@@ -134,26 +138,17 @@ def main_handler(event, context):
     return main()
 
 if __name__ == '__main__':
-    #PJS
-    user = "15918716015"
-    password = "PJSfy757"
-    step = str(randint(45678,47869))
+    #手机号
+    user = "1*********6"
+    #密码
+    password = "1******8"
+    #随机步数
+    step = str(randint(98800,100000))
+    #执行
     main()
 
-    #WSZ
-    user = "15817173886"
-    password = "WSZfy979"
+    #多用户登录
+    user = "1*********9"
+    password = "1******8"
     step = str(randint(17760,19999))
-    main()
-
-    #ZWT
-    user = "15750831200"
-    password = "qq1314520"
-    step = str(randint(34567,36666))
-    main()
-
-    #WXF
-    user = "18219317399"
-    password = "WXFwxf666"
-    step = str(randint(10001,12345))
     main()
