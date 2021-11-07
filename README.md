@@ -15,6 +15,12 @@ password = "1******8" #密码
 step = str(randint(17760,19999)) #随机步数
 ```
 
+* API配置文件 `data_json.txt`
+
+修复 by.Quiet
+
+QQ群：60067386
+
 * GitHub Actions `workflows.yml`
 
 将文件放在 `.github/workflows` 文件夹下
