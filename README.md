@@ -4,7 +4,7 @@
 
 项目源码地址：[DingtalkChatbot](https://github.com/zhuifengshen/DingtalkChatbot)
 
-# 关于配置文件
+# 一、关于配置文件
 
 * 主配置文件 `workflows.py`
 
@@ -21,7 +21,7 @@ step = str(randint(17760,19999)) #随机步数
 
 `workflows.yml` 会自动执行主配置文件
 
-# 关于时间的问题
+# 二、关于时间问题
 
 注：GitHub的时间格式是UTC
 
