@@ -16,25 +16,16 @@ step = str(randint(17760,19999)) #随机步数
 ```
 
 * API配置文件 `data_json.txt`
-
-修复 by.Quiet
-
-QQ群：60067386
+&ensp;修复 by.Quiet
+&ensp;QQ群：60067386
 
 * GitHub Actions `workflows.yml`
-
-将文件放在 `.github/workflows` 文件夹下
-
-`workflows.yml` 会自动执行主配置文件
+&ensp;将文件放在 `.github/workflows` 文件夹下
+&ensp;`workflows.yml` 会自动执行主配置文件
 
 # 二、关于时间问题
-
-注：GitHub的时间格式是UTC
-
+&ensp;注：GitHub的时间格式是UTC
 * `date` 时间格式是本地时间
-
 * `date_time` 时间格式是本地时间+8h
-
-如配置腾讯云函数等可自行修改
-
-位置在主配置 `workflows.py` 的第105行
+&ensp;如配置腾讯云函数等可自行修改
+&ensp;位置在主配置 `workflows.py` 的第105行
