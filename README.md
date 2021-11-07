@@ -4,7 +4,7 @@
 
 项目源码地址：[DingtalkChatbot](https://github.com/zhuifengshen/DingtalkChatbot)
 
-# 一、关于配置文件
+# 关于配置文件
 
 * 主配置文件 `workflows.py`
 
@@ -24,12 +24,3 @@ QQ群：60067386
 
 将文件放在 `.github/workflows` 文件夹下  
 `workflows.yml` 会自动执行主配置文件
-
-# 二、关于时间问题
-
-注：GitHub的时间格式是UTC
-* `date` 获取本地时间
-* `date_time` 获取本地时间+8h
-
-如配置腾讯云函数等可自行修改  
-位置在主配置 `workflows.py` 的第105行
