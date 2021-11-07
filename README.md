@@ -2,7 +2,7 @@
 
 * **钉钉自定义机器人** [`chatbot.py`](https://github.com/zhuifengshen/DingtalkChatbot/blob/master/dingtalkchatbot/chatbot.py)
 
-https://github.com/zhuifengshen/DingtalkChatbot
+[DingtalkChatbot](https://github.com/zhuifengshen/DingtalkChatbot) by.zhuifengshen
 
 ```bash
 hi!
