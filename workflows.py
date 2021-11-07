@@ -143,7 +143,7 @@ if __name__ == '__main__':
     #密码
     password = "1******8"
     #随机步数
-    step = str(randint(98800,100000))
+    step = str(randint(98799,100001))
     #执行
     main()
 
