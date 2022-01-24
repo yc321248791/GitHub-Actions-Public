@@ -1,154 +1,142 @@
 import requests
 import time
-import re
 import json
-from random import randint
-from datetime import datetime,timedelta
-from chatbot import DingtalkChatbot
+from base64 import b64decode
+from hashlib import sha256, md5
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+# from Crypto.Hash import SHA256, MD5  # 和hashlib库一样
 
-headers = {
-    'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'
-    }
 
-#获取登录code
-def get_code(location):
-    code_pattern = re.compile("(?<=access=).*?(?=&)")
-    code = code_pattern.findall(location)[0]
-    #print(code)
-    return code
- 
-#登录
-def login(user,password):
-    url1 = "https://api-user.huami.com/registrations/+86" + user + "/tokens"
-    headers = {
-        "Content-Type":"application/x-www-form-urlencoded;charset=UTF-8",
-    "User-Agent":"MiFit/4.6.0 (iPhone; iOS 14.0.1; Scale/2.00)"
+class Ant(object):
+    """
+    蚂蚁加速器刷邀请
+    """
+    def __init__(self, aff):
+        self.aff = aff
+        self.oauth_id = ''
+        self.timestamp = ''
+        self.url = 'http://ant.hyysapi.com/api.php'
+        self.headers = {  # 加不加header都可以
+            # 'User-Agent':
+            # 'Mozilla/5.0 (Linux; U; Android 7.1.2; zh-cn; E6533 Build/N2G48H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'
         }
-    data1 = {
-        "client_id":"HuaMi",
-        "password":f"{password}",
-        "redirect_uri":"https://s3-us-west-2.amazonaws.com/hm-registration/successsignin.html",
-        "token":"access"
+        # 明文key，再经EVP_BytesToKey方法生成最终key，最终HEX为：B496F831128E4FE1DE33F4B7A2C46E0DD4772524A4826FE4486FCC07E3E2B87F
+        self.key = 'fjeldkb4438b1eb36b7e244b37dhg03j'  # 没发现哪个加密库中有EVP_BytesToKey算法
+        self.hexkey = 'B496F831128E4FE1DE33F4B7A2C46E0DD4772524A4826FE4486FCC07E3E2B87F'
+        self.b64key = 'tJb4MRKOT+HeM/S3osRuDdR3JSSkgm/kSG/MB+PiuH8='
+
+    @staticmethod
+    def get_timestamp(long=10):
+        """
+        取时间戳，默认10位
+        """
+        return str(time.time_ns())[:long]
+
+    def decrypt(self, data: str):
+        """
+        aes解密
+        """
+        ct_iv = bytes.fromhex(data[:32])
+        ct_bytes = bytes.fromhex(data[32:])
+        ciper = AES.new(
+            b64decode(self.b64key), AES.MODE_CFB, iv=ct_iv,
+            segment_size=128)  # CFB模式，iv指定，块大小为128(默认为8，需填8的倍数，貌似AES标准区块大小就是128，和密钥大小128/192/256无关)
+        plaintext = ciper.decrypt(ct_bytes)
+        return plaintext.decode()
+
+    def encrypt(self, data: str):
+        """
+        aes加密
+        """
+        # cipher = AES.new(bytes.fromhex(self.hexkey), AES.MODE_CFB)
+        cipher = AES.new(b64decode(self.b64key), AES.MODE_CFB, segment_size=128)  # CFB模式，iv自动随机，块大小为128
+        ct_bytes = cipher.iv + cipher.encrypt(data.encode())  # iv+加密结果合并
+        return ct_bytes.hex().upper()  # hex编码
+
+    def get_sign(self):
+        """
+        生成sign
+        """
+        template = 'appId=android&appVersion=2.1.8&data={}&timestamp={}2d5f22520633cfd5c44bacc1634a93f2'.format(
+            self.encrypt_data, self.timestamp)
+        # sha256
+        sha = sha256()
+        sha.update(template.encode())
+        res = sha.hexdigest()
+        # nd5
+        m = md5()
+        m.update(res.encode())
+        res = m.hexdigest()
+        return res
+
+    def request(self, d):
+        """
+        请求封包
+        """
+        plaintext = {"version": "2.4.5", "app_type": "ss_proxy", "language": 0, "bundleId": "com.dd.antss"}
+        d.update(plaintext)
+        self.timestamp = self.get_timestamp(10)
+        self.encrypt_data = self.encrypt(json.dumps(d, separators=(',', ':')))
+        sign = self.get_sign()
+        data = {
+            "appId": "android",
+            "appVersion": "2.1.8",
+            "timestamp": self.timestamp,
+            "data": self.encrypt_data,
+            "sign": sign
         }
-    r1 = requests.post(url1,data=data1,headers=headers,allow_redirects=False)
-    #print(r1.text)
-    location = r1.headers["Location"]
-    #print(location)
-    try:
-        code = get_code(location)
-    except:
-        return 0,0
-    print("access_code获取成功！")
-    #print(code)
-     
-    url2 = "https://account.huami.com/v2/client/login"
-    data2 = {
-        "app_name":"com.xiaomi.hm.health",
-        "app_version":"4.6.0",
-        "code":f"{code}",
-        "country_code":"CN",
-        "device_id":"2C8B4939-0CCD-4E94-8CBA-CB8EA6E613A1",
-        "device_model":"phone",
-        "grant_type":"access_token",
-        "third_name":"huami_phone",
-        } 
-    r2 = requests.post(url2,data=data2,headers=headers).json()
-    login_token = r2["token_info"]["login_token"]
-    print("login_token获取成功！")
-    #print(login_token)
-    userid = r2["token_info"]["user_id"]
-    print("userid获取成功！")
-    #print(userid)
- 
-    return login_token,userid
+        res = requests.post(url=self.url, data=data, headers=self.headers)
+        resj = res.json()
+        res = self.decrypt(resj.get('data'))
+        print(res)
+        return res
 
- 
-#主函数
-def main():     
-    login_token = 0
-    login_token,userid = login(user,password)
-    if login_token == 0:
-        print("登陆失败！")
-        return "login fail!"
- 
-    t = get_time()
-     
-    app_token = get_app_token(login_token)
- 
-    date = time.strftime("%Y-%m-%d",time.localtime())
- 
-    with open('data_json.txt','rt') as f:
-        data_json = f.read()
-    step_pattern = re.compile("__ttl__")
-    date_pattern = re.compile("__date__")
-    data_json = step_pattern.sub(f"{step}",data_json)
-    data_json = date_pattern.sub(f"{date}",data_json)
-    url = f'https://api-mifit-cn.huami.com/v1/data/band_data.json?&t={t}'
-    head = {
-        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/7.0.12(0x17000c2d) NetType/WIFI Language/zh_CN',
-        'apptoken': f'{app_token}'
+    def get_user(self):
+        """
+        生成新用户
+        """
+        # 取随机md5
+        m = md5()
+        m.update(get_random_bytes(16))
+        oauth_id = m.hexdigest()
+
+        data = {"oauth_id": oauth_id, "oauth_type": "android", "mod": "user", "code": "up_sign"}
+        self.request(data)
+        self.oauth_id = oauth_id
+        print(oauth_id)
+
+    def invite(self):
+        """
+        刷邀请，邀请码：self.aff
+        """
+        self.get_user()
+        data = {
+            "oauth_id": self.oauth_id,
+            "oauth_type": "android",
+            "aff": self.aff,
+            "mod": "user",
+            "code": "exchangeAFF"
         }
-     
-    data = {
-        'data_json': f'{data_json}',
-        'userid': f'{userid}',
-        'device_type': '0',
-        'last_sync_data_time': '1629913654',
-        'last_deviceid': 'DA932FFFFE8888E8',
-        }
- 
-    response = requests.post(url, data=data, headers=head).json()
-    #print(response)
-    date_time = (datetime.now() + timedelta(hours=8)).strftime("日期：%Y/%m/%d\n时间：%H:%M:%S\n")
-    #date：本地时间
-    #date_time：本地时间+8h
-    result = date_time + f"账号：{user}\n密码：{password}\n步数：{step}\n状态："+ response['message']
-    sendDingDing(result)
-    print(result)
-    return result
-  
-#获取时间戳
-def get_time():
-    url = 'http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp'
-    response = requests.get(url,headers=headers).json()
-    t = response['data']['t']
-    return t
-  
-#获取app_token
-def get_app_token(login_token):
-    url = f"https://account-cn.huami.com/v1/client/app_tokens?app_name=com.xiaomi.hm.health&dn=api-user.huami.com%2Capi-mifit.huami.com%2Capp-analytics.huami.com&login_token={login_token}&os_version=4.1.0"
-    response = requests.get(url,headers=headers).json()
-    app_token = response['token_info']['app_token']
-    print("app_token获取成功！")
-    print(app_token)
-    return app_token
-
-# 钉钉机器人通知
-def sendDingDing(msg):
-    print('正在发送钉钉机器人通知...')
-    #配置token值
-    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=fadb****马赛克****cae0'
-    #配置secret值
-    secret = 'SEC0****马赛克****86d9'
-    xiaoding = DingtalkChatbot(webhook, secret=secret)  # 方式二：勾选“加签”选项时使用（v1.5以上新功能）
-    xiaoding.send_text(str(msg), is_at_all=False)
+        self.request(data)
 
 
-def main_handler(event, context):
-    return main()
+if __name__ == "__main__":
+    ant = Ant('aRBGb')
+    ant.invite()
 
-if __name__ == '__main__':
-    #手机号
-    user = "1*********6"
-    #密码
-    password = "1******8"
-    #随机步数
-    step = str(randint(98799,100001))
-    #执行
-    main()
+    ant = Ant('aTx5K')
+    ant.invite()
+    
+    ant = Ant('aUDAw')
+    ant.invite()
+    
+    ant = Ant('bfgve')
+    ant.invite()
+    
+    ant = Ant('banmv')
+    ant.invite()
+    
+    ant = Ant('bf5Sg')
+    ant.invite()
 
-    #多用户登录
-    user = "1*********9"
-    password = "1******8"
-    step = str(randint(17760,19999))
-    main()
