@@ -6,7 +6,7 @@
 >
 > [`huami-step.yml`](https://github.com/s757129/GitHub-Actions-Public/blob/main/huami-step/huami-step.yml) 会自动执行文件 [`index.py`](https://github.com/s757129/GitHub-Actions-Public/blob/main/huami-step/index.py)
 
-* 钉钉自定义机器人 [`chatbot.py`](https://github.com/zhuifengshen/DingtalkChatbot/blob/master/dingtalkchatbot/chatbot.py)
+* 钉钉自定义机器人 [`chatbot.py`](https://github.com/zhuifengshen/DingtalkChatbot/blob/master/dingtalkchatbot/chatbot.py) 配置
 
 * 部署账号密码步数 [`index.py`](https://github.com/s757129/GitHub-Actions-Public/blob/main/huami-step/index.py) 如下：
 ```bash
