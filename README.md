@@ -1,10 +1,10 @@
-# GitHub-Actions-Public
+# 🌈GitHub-Actions-Public
 
 ## **关于 [小米运动](https://app.mi.com/details?id=com.xiaomi.hm.health) 自动提交步数**
 
 * 将文件 [`huami-step.yml`](https://github.com/s757129/GitHub-Actions-Public/blob/main/huami-step/huami-step.yml) 放在 [.github/workflows](https://github.com/s757129/GitHub-Actions-Public/tree/main/.github/workflows) 目录下，文件 [`index.py`](https://github.com/s757129/GitHub-Actions-Public/blob/main/huami-step/index.py) 会自动执行
 
-* **钉钉自定义机器人** `chatbot.py` → [配置文档](https://github.com/zhuifengshen/DingtalkChatbot) ←
+* **钉钉自定义机器人** `chatbot.py` 👉 [配置文档](https://github.com/zhuifengshen/DingtalkChatbot) 👈
 
 * **部署账号密码步数** [`index.py`](https://github.com/s757129/GitHub-Actions-Public/blob/main/huami-step/index.py) 如下：
 ```python
