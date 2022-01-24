@@ -7,7 +7,7 @@
     - **钉钉自定义机器人** [`chatbot.py`](https://github.com/zhuifengshen/DingtalkChatbot/blob/master/dingtalkchatbot/chatbot.py) 配置
 
     - **部署账号密码步数** [`index.py`](https://github.com/s757129/GitHub-Actions-Public/blob/main/huami-step/index.py) 如下：
-```bash
+```python
 # 【华米科技】小米运动APP
 user = "1*********6" # 手机号
 password = "1******8" # 密码
