@@ -1,6 +1,6 @@
 # GitHub-Actions-Public
 
-* **关于 微信运动、支付宝运动 自动刷步数**
+* **关于 小米运动 自动提交步数**
 
 > 将文件 [`huami-step.yml`](https://github.com/s757129/GitHub-Actions-Public/blob/main/huami-step/huami-step.yml) 放在 [.github/workflows](https://github.com/s757129/GitHub-Actions-Public/tree/main/.github/workflows) 目录下
 >
