@@ -134,26 +134,7 @@ def main_handler(event, context):
     return main()
 
 if __name__ == '__main__':
-    #PJS
-    user = "15918716015"
-    password = "PJSfy757"
-    step = str(randint(45678,47869))
-    main()
-
-    #WSZ
-    user = "15817173886"
-    password = "WSZfy979"
-    step = str(randint(34567,36666))
-    main()
-
-    #ZWT
-    user = "15750831200"
-    password = "qq1314520"
-    step = str(randint(26548,28456))
-    main()
-
-    #WXF
-    user = "18219317399"
-    password = "WXFwxf666"
-    step = str(randint(17760,19999))
+    user = "1*********6" #手机
+    password = "1******8" #密码
+    step = str(randint(17760,19999)) #随机步数
     main()
