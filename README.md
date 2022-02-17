@@ -17,7 +17,7 @@ ant = Ant('a***A') #邀请码
 * **部署账号密码步数 [`index.py`](https://github.com/s757129/GitHub-Actions-Public/blob/main/huami-step/index.py) 如下：**
 
 ```python
-#【华米科技】微信/支付宝
+#【小米运动】微信/支付宝
 user = "1*********6" #手机号
 password = "1******8" #密码
 step = str(randint(17760,19999)) #随机步数
