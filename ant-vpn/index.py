@@ -120,5 +120,5 @@ class Ant(object):
         self.request(data)
 
 if __name__ == "__main__":
-    ant = Ant('aRBGb')
+    ant = Ant('a***A')
     ant.invite()
