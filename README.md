@@ -25,4 +25,4 @@ step = str(randint(17760,19999)) #随机步数
 
 * **【注】不会使用钉钉机器人或不需要通知等，可自行注释如下内容：**
 
-`sendDingDing(result) #第103行`
+`sendDingDing(result) #大概在第103行`
