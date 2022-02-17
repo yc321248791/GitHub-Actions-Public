@@ -1,7 +1,7 @@
 # 🌈GitHub-Actions-Public
 
 ### 1. **关于 某加速器 自动刷邀请领无限流量**
-* **作者：[@二毛](https://erma0.cn)**
+* **作者：[二毛](https://erma0.cn)**
 * **文章：[记一次某加速器APP算法解密实现刷邀请](https://segmentfault.com/a/1190000040012580)**
 * **部署账号密码步数 [`index.py`](https://github.com/s757129/GitHub-Actions-Public/blob/main/ant-vpn/index.py) 如下：**
 
