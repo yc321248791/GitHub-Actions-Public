@@ -13,7 +13,7 @@ ant = Ant('a***A') #邀请码
 ---
 
 ### 2. **关于 [小米运动](https://app.mi.com/details?id=com.xiaomi.hm.health) 每天自动提交步数**
-* **钉钉自定义机器人** `chatbot.py` 👉 [配置文档](https://github.com/zhuifengshen/DingtalkChatbot) 👈
+* **钉钉自定义机器人** **`chatbot.py`** 👉 [配置文档](https://github.com/zhuifengshen/DingtalkChatbot) 👈
 * **部署账号密码步数** **[`index.py`](https://github.com/s757129/GitHub-Actions-Public/blob/main/huami-step/index.py) 如下：**
 
 ```python
