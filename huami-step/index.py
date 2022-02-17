@@ -62,7 +62,6 @@ def login(user,password):
  
     return login_token,userid
 
- 
 #主函数
 def main():     
     login_token = 0
@@ -124,11 +123,10 @@ def get_app_token(login_token):
 # 钉钉机器人通知
 def sendDingDing(msg):
     print('正在发送钉钉机器人通知...')
-    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=fadb9756052d6bbafb45e72e10477f9ad94020ad55058903806b21209170cae0'
-    secret = 'SEC024ea5ad293132c70a3439a9dbfefcb9ed5795e8c138d4c7e39406f296c286d9'
-    xiaoding = DingtalkChatbot(webhook, secret=secret)  # 方式二：勾选“加签”选项时使用（v1.5以上新功能）
+    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=fadb97******70cae0' #自定义机器人
+    secret = 'SEC024******c286d9' #密钥
+    xiaoding = DingtalkChatbot(webhook, secret=secret)
     xiaoding.send_text(str(msg), is_at_all=False)
-
 
 def main_handler(event, context):
     return main()
