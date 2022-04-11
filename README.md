@@ -1,4 +1,4 @@
-# 🌈GitHub-Actions-Public
+# 🚀GitHub-Actions-Public
 
 ### 1. **关于 [某加速器](https://ant.aff003.me) 自动刷邀请领无限流量**
 * **原创作者：[二毛](https://erma0.cn)**
