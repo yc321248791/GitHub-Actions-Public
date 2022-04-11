@@ -1,9 +1,13 @@
 # 🚀GitHub-Actions-Public
 
 <p align="middle">
-	<img src="https://emojis.slackmojis.com/emojis/images/1643514495/4795/ship_it_further_parrot.gif" width="33%"/>
-	<img src="https://emojis.slackmojis.com/emojis/images/1643514495/4795/ship_it_further_parrot.gif" width="33%"/>
-	<img src="https://emojis.slackmojis.com/emojis/images/1643514495/4795/ship_it_further_parrot.gif" width="33%"/>
+	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
+	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
+	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
+	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
+	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
+	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
+	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
 </p>
 
 ### 1. **关于 [某加速器](https://ant.aff003.me) 自动刷邀请领无限流量**
