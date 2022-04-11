@@ -1,5 +1,11 @@
 # 🚀GitHub-Actions-Public
 
+<p align="middle">
+	<img src="https://emojis.slackmojis.com/emojis/images/1643514987/10139/shipit_parrot.gif" width="33%"/>
+	<img src="https://emojis.slackmojis.com/emojis/images/1643514987/10139/shipit_parrot.gif" width="33%"/>
+	<img src="https://emojis.slackmojis.com/emojis/images/1643514987/10139/shipit_parrot.gif" width="33%"/>
+</p>
+
 ### 1. **关于 [某加速器](https://ant.aff003.me) 自动刷邀请领无限流量**
 * **原创作者：[二毛](https://erma0.cn)**
 * **原创文章：[记一次某加速器APP算法解密实现刷邀请](https://segmentfault.com/a/1190000040012580)**
