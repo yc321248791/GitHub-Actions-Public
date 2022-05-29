@@ -2,13 +2,6 @@
 
 <br>
 <p align="middle">
-	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
-	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
-	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
-	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
-	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
-	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
-	<img src="https://emojis.slackmojis.com/emojis/images/1643514276/2453/alert.gif" width="13%"/>
 </p>
 <br>
 
