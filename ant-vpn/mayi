@@ -1,0 +1,124 @@
+导入 请求
+进口 时间
+导入 json
+从 base64 导入 b64decode
+从 hashlib 导入 sha256 , md5
+来自 加密货币。密码 导入 AES
+来自 加密货币。随机 导入 get_random_bytes
+# from Crypto.Hash import SHA256, MD5 # 和hashlib库一样
+
+ 蚂蚁类（对象）：
+    """
+    蚂蚁加速器刷邀请
+    """
+    def  __init__ ( self , aff ):
+        自我。阿夫 = 阿夫
+        自我。oauth_id  =  ''
+        自我。时间戳 =  ''
+        自我。url  =  'http://ant.hyysapi.com/api.php'
+        自我。headers  = {   # 加不加header都可以
+            ＃ '用户代理'：
+            # 'Mozilla/5.0 (Linux; U; Android 7.1.2; zh-cn; E6533 Build/N2G48H) AppleWebKit/534.30 (KHTML, like Gecko) 版本/4.0 Mobile Safari/534.30'
+        }
+        # 明文key，再经EVP_BytesToKey方法生成最终key，最终HEX为：B496F831128E4FE1DE33F4B7A2C46E0DD4772524A4826FE4486FCC07E3E2B87F
+        自我。key  =  'fjeldkb4438b1eb36b7e244b37dhg03j'   # 没发现哪个加密库里面有EVP_BytesToKey算法
+        自我。hexkey  =  'B496F831128E4FE1DE33F4B7A2C46E0DD4772524A4826FE4486FCC07E3E2B87F'
+        自我。b64key  =  'tJb4MRKOT+HeM/S3osRuDdR3JSSkgm/kSG/MB+PiuH8='
+
+    @静态方法
+    def  get_timestamp ( long = 10 ):
+        """
+        取，默认10位
+        """
+        返回 str ( time . time_ns ())[: long ]
+
+    def 解密（自我，数据：str）：
+        """
+        一个加密
+        """
+        ct_iv  = 字节。fromhex (数据[: 32 ])
+        ct_bytes  = 字节。fromhex (数据[ 32 :])
+        密码 =  AES。新(
+            b64decode（自我。b64key），AES。MODE_CFB , iv = ct_iv ,
+            segment_size = 128 )   #CFB模式，iv指定，块大小(默认为8个，需要8个的倍数，8个AES标准大小就是12个，和密钥大小128/192/256)
+        明文 =  ciper。解密( ct_bytes )
+        返回 明文。解码()
+
+    def 加密（自我，数据：str）：
+        """
+        aes加密
+        """
+        # cipher = AES.new(bytes.fromhex(self.hexkey), AES.MODE_CFB)
+        密码 =  AES。new ( b64decode ( self . b64key ), AES . MODE_CFB , segment_size = 128 )   # CFB模式，iv自动，块大小为128
+        ct_bytes  = 密码。iv  + 密码。encrypt ( data.encode ( ) )   #iv+加密结果合并
+        返回 ct_bytes。十六进制（）。upper ()   # 十六进制编码
+
+    def  get_sign (自我):
+        """
+        生成符号
+        """
+        模板 =  'appId=android&appVersion=2.1.8&data={}×tamp={}2d5f22520633cfd5c44bacc1634a93f2'。格式（
+            自我。加密数据，自我。时间戳）
+        #sha256
+        sha  =  sha256 ()
+        沙。更新（模板。编码（））
+        水库 = 沙。十六进制摘要()
+        #nd5
+        m  =  md5 ()
+        米。更新（水库。编码（））
+        水库 = 米。十六进制摘要()
+        返回 资源
+
+    def 请求( self , d ):
+        """
+        请求封包
+        """
+        明文 = { “版本”：“2.4.5”，“app_type”：“ss_proxy”，“语言”：0，“bundleId”：“com.dd.antss” }
+        d . 更新（明文）
+        自我。时间戳 = 自我。获取时间戳（10）
+        自我。加密数据 = 自我。加密( json .转储( d ,分隔符= ( ',' , ':' )))
+        符号 = 自我。get_sign ()
+        数据 = {
+            “appId”：“安卓”，
+            "appVersion" : "2.1.8" ,
+            “时间戳”：自我。时间戳,
+            “数据”：自我。加密数据，
+            “标志”：标志
+        }
+        res  = 请求。发布（网址=自我。网址，数据=数据，标题=自我。标题）
+        水库 = 水库。json ()
+        资源 = 自我。解密（resj.get（' data '））
+        打印( res )
+        返回 资源
+
+    def  get_user (自我):
+        """
+        生成新用户
+        """
+        # 取随时md5
+        m  =  md5 ()
+        米。更新（get_random_bytes（16））
+        oauth_id  =  m。十六进制摘要()
+
+        数据 = { “oauth_id”：oauth_id，“oauth_type”：“android”，“mod”：“user”，“code”：“up_sign” }
+        自我。请求（数据）
+        自我。oauth_id  =  oauth_id
+        打印（oauth_id）
+
+    定义 邀请（自我）：
+        """
+        刷邀请，邀请码：self.aff
+        """
+        自我。获取用户（）
+        数据 = {
+            “oauth_id”：自我。oauth_id ,
+            “oauth_type”：“安卓”，
+            “aff”：自我。, _
+            “模组”：“用户”，
+            “代码”：“exchangeAFF”
+        }
+        自我。请求（数据）
+
+如果 __name__  ==  "__main__"：
+    ant  =  Ant ( 'M4tW' ) #邀请码
+    蚂蚁。邀请()
